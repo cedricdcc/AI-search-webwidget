@@ -1,0 +1,23 @@
+{
+  "name": "ai-search-webwidget",
+  "version": "1.0.0",
+  "description": "Inspired by dyte.io I want to create a webwidget that has the capabilities to gather context from the domain it is on. This context will either be the text that is displayed on the pages from the site or the linked data it can find on the site.\r This data can then be querried by an end-user to answer questions about the page.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@huggingface/transformers": "^3.1.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.7.2",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4"
+  }
+}
