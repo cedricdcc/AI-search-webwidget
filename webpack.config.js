@@ -3,13 +3,19 @@ const path = require("path");
 module.exports = {
   entry: "./src/index.ts",
   output: {
-    filename: "qa-widget.js",
+    filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
-    library: "QAWidget",
-    libraryTarget: "umd",
   },
   resolve: {
     extensions: [".ts", ".js"],
+    alias: {
+      "@huggingface/transformers": path.resolve(
+        __dirname,
+        "node_modules/@huggingface/transformers"
+      ),
+      sharp$: false,
+      "onnxruntime-node$": false,
+    },
   },
   module: {
     rules: [
@@ -20,5 +26,8 @@ module.exports = {
       },
     ],
   },
-  mode: "production",
+  mode: "development",
+  stats: {
+    errorDetails: true,
+  },
 };

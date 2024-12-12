@@ -1,4 +1,4 @@
-import { initializeModel, answerQuestion } from "../src/transformers";
+import { initializeModel, answerQuestion } from "../src/transformers-functions";
 
 describe("Transformers Integration", () => {
   beforeAll(async () => {
