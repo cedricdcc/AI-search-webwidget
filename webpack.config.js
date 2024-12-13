@@ -9,7 +9,7 @@ module.exports = {
     libraryTarget: "umd", // Universal Module Definition
   },
   resolve: {
-    extensions: [".ts", ".js", ".tsx"],
+    extensions: [".ts", ".tsx", ".js"],
     alias: {
       "@huggingface/transformers": path.resolve(
         __dirname,
@@ -22,15 +22,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|tsx?)$/,
+        test: /\.tsx?$/,
         use: "ts-loader",
         exclude: /node_modules/,
       },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader", "postcss-loader"],
+      },
     ],
-  },
-  externals: {
-    react: "React",
-    "react-dom": "ReactDOM",
   },
   mode: "development",
   stats: {
