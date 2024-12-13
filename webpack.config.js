@@ -1,13 +1,15 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/index.ts",
+  entry: "./src/index.tsx",
   output: {
-    filename: "bundle.js",
+    filename: "qa-widget.js",
     path: path.resolve(__dirname, "dist"),
+    library: "QAWidgetGlobal", // Expose the QAWidgetGlobal object
+    libraryTarget: "umd", // Universal Module Definition
   },
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: [".ts", ".js", ".tsx"],
     alias: {
       "@huggingface/transformers": path.resolve(
         __dirname,
@@ -20,11 +22,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.(js|tsx?)$/,
         use: "ts-loader",
         exclude: /node_modules/,
       },
     ],
+  },
+  externals: {
+    react: "React",
+    "react-dom": "ReactDOM",
   },
   mode: "development",
   stats: {

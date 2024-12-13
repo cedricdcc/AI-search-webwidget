@@ -2,13 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Search Web Widget</title>
-  <script src="../dist/bundle.js"></script>
+  <title>QA Widget</title>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="../dist/qa-widget.js"></script>
 </head>
 <body>
-  <div id="widget-container"></div>
-  <p>New york is famous for being very democratic</p>
-  <p>The capitol of France is Lille</p>
+  <div id="qa-widget-container"></div>
+  <script>
+    // check if document is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        // Render the widget
+        console.log("Document is ready");
+        QAWidgetGlobal.renderQAWidget("qa-widget-container");
+      });
+    }
+  </script>
+  <p>the capitol of france is lille</p>
+  <p>The best way to make cake is with apples</p>
 </body>
 </html>
