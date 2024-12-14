@@ -5,6 +5,7 @@ export const QAWidget: React.FC = () => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleAskQuestion = async () => {
     const context = document.body.innerText; // Crawled text
@@ -20,36 +21,50 @@ export const QAWidget: React.FC = () => {
     init();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <div className="text-center">
-          <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
-          <p className="text-gray-500 text-lg">Loading AI search...</p>
-        </div>
-      </div>
-    );
-  }
+  const handleOpenModal = () => {
+    if (!loading) {
+      setModalOpen(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
   return (
-    <div style={{ border: "1px solid #ccc", padding: "10px", width: "300px", opacity: loading ? 0.5 : 1 }}>
-      <h3>Ask a Question</h3>
-      <input
-        type="text"
-        value={question}
-        onChange={(e) => setQuestion(e.target.value)}
-        placeholder="Type your question here"
-        style={{ width: "100%", marginBottom: "10px" }}
-      />
-      <button onClick={handleAskQuestion} style={{ width: "100%" }}>
-        Ask
+    <>
+      <button
+        onClick={handleOpenModal}
+        disabled={loading}
+        className={`border border-gray-300 p-2 w-72 ${loading ? "opacity-50" : "opacity-100"}`}
+      >
+        {loading ? "Loading AI search..." : "Ask a Question"}
       </button>
-      {answer && (
-        <div style={{ marginTop: "10px" }}>
-          <strong>Answer:</strong>
-          <p>{answer}</p>
+
+      {modalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={handleCloseModal}>&times;</span>
+            <h3 className="text-lg font-bold mb-2">Ask a Question</h3>
+            <input
+              type="text"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="Type your question here"
+              className="w-full mb-2 p-2 border border-gray-300"
+            />
+            <button onClick={handleAskQuestion} className="w-full p-2 bg-blue-500 text-white">
+              Ask
+            </button>
+            {answer && (
+              <div className="mt-2">
+                <strong>Answer:</strong>
+                <p>{answer}</p>
+              </div>
+            )}
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
